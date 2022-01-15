@@ -1,4 +1,4 @@
-import Product from "../models/christmas.model.js";
+import Product from "../models/product.model.js";
 
 const getProducts = async (req, res) => {
   // res = result
@@ -8,12 +8,14 @@ const getProducts = async (req, res) => {
 };
 
 const getProduct = async (req, res) => {
+  // ohne async-await ist es BLOCKING-Code, mit async-await ist es Non-BLOCKING-Code
   const productId = req.params.productId;
   const foundProduct = await Product.findById(productId);
   res.json(foundProduct);
 };
 
 const postProduct = async (req, res) => {
+  // mit async sagt man dem Programm, dieser Code-Block ist asynchron, du musst nicht darauf warten!
   const newProduct = new Product({
     name: req.body.name,
     price: req.body.price,
@@ -22,7 +24,7 @@ const postProduct = async (req, res) => {
     productTags: req.body.productTags,
     contactEmail: req.body.contactEmail,
   });
-  const result = await newProduct.save();
+  const result = await newProduct.save(); // await = warte auf newProduct & sobald das da ist, mache "save"
   res.json(result);
 };
 

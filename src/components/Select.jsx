@@ -8,9 +8,15 @@ function Select ({name, value, children, options, onSelectChange}) {
     <label htmlFor={name}>{children}</label>
       <select value={value} onChange={handleInputChange} name={name} id={name}>
           <option value="">–– Please choose ––</option>
-          {options.map((option, index) => (
+          {
+            options.map(option => (
+              <option key={option._id} value={option.name}>{option.name}</option>
+            ))
+          }
+
+          {/* {options.map((option, index) => (
           <option key={index} value={option.toUpperCase()}>{option}</option>
-        ))}
+        ))} */}
       </select>
     </>
   );
